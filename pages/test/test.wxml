@@ -1,0 +1,28 @@
+<view>
+  这是测试page
+  <button type="warn" open-type='share' id='shareTest'>clickme</button>
+</view>
+<!--数据绑定  -->
+<view>{{msg.a}}</view>
+<!--列表渲染  -->
+<view wx:for="{{msg.arr}}">{{index}} : {{"hello " + item}}</view>
+<!--条件渲染  -->
+<view wx:if="{{name == 'apple'}}">apple</view>
+<view wx:elif="{{name == 'banana'}}">banana</view>
+<view wx:else="{{name == 'orange'}}">orange</view>
+<!--模板  -->
+<template name="staffName">
+  <view>
+    FirstName: {{firstName}}, LastName: {{lastName}}
+  </view>
+</template>
+
+<template is="staffName" data="{{...staffA}}"></template>
+<template is="staffName" data="{{...staffB}}"></template>
+<template is="staffName" data="{{...staffC}}"></template><!-- "..."为扩展运算符-->
+<!--事件  -->
+<view bindtap="add">点击我加一{{count}}</view>
+<button bindtap='imgFn'>选择图片</button>
+<view>
+<image wx:if='{{imageArr}}' src='{{imageArr}}' style='width:300rpx;height:300rpx'></image>
+</view>
