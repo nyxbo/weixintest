@@ -10,14 +10,15 @@ Page({
   data: {
     msg:{
       a: '数据1',
-      arr: ['a','b','c'],
-      
+      arr: ['a','b','c']
     },
     name: 'banana',
     staffA: { firstName: 'Hulk', lastName: 'Hu' },
     staffB: { firstName: 'Shang', lastName: 'You' },
     staffC: { firstName: 'Gideon', lastName: 'Lin' },
-    count: 1
+    count: 1,
+    listData: [],
+    focusData: []
   },
 
   /**
@@ -25,10 +26,30 @@ Page({
    */
   onLoad: function (options) {
     console.log('======生命周期函数onLoad监听页面加载======')
-    var self = this;
-    app.$http.get(url).then(function (res) {
-      var a = self.detailData(res.data)
-      console.log("bobobo",a)
+    var _this = this
+    // 动态设置当前页面的标题
+    wx.setNavigationBarTitle({
+      title: 'demo新闻'
+    }),
+    // 发起网络请求
+    wx.request({
+      url: url,
+      success:function(res){
+        console.log('bobobo',res)
+        var lisrArr = []
+        var focusArr = []
+        res.data.forEach(function(item){
+          if(item.type === 'list'){
+            lisrArr = item.item
+          }else if(item.type === 'focus'){
+            focusArr = item.item
+          }
+        })
+        _this.setData({
+          listData: lisrArr,
+          focusData: focusArr
+        })
+      }
     })
   },
 
@@ -84,6 +105,11 @@ Page({
       path:'/pages/test',
       imageUrl:'http://p2.ifengimg.com/d27607d14a52d158/2018/27/content.png'
     }
+  },
+
+  // 用户下拉刷新事件
+  onPullDownRefresh: function(){
+
   },
 
   // 绑定事件

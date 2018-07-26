@@ -1,0 +1,8 @@
+<!--pages/news/news.wxml-->
+<scroll-view style='height: 1500rpx'>
+<view class='nav-bar'>
+  <block wx:for='{{listData}}'>
+    <view>{{item.name}}</view>
+  </block>
+</view>
+</scroll-view>

@@ -1,0 +1,13 @@
+<!--pages/detail/detail.wxml-->
+<scroll-view style='height:1500rpx' scroll-y='true'>
+  <!-- <view class='container'> -->
+    <view class='title'>{{detail.title}}</view>
+    <view class='user-source'>
+      <view class='source'>{{detail.source}}</view>
+      <view class='time'>{{detail.updateTime}}</view>
+    </view>
+    <view class='content'>
+      <rich-text nodes='{{text}}' class='richClass'></rich-text>
+    </view>
+  <!-- </view> -->
+</scroll-view>

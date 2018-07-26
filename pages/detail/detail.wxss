@@ -1,0 +1,27 @@
+/* pages/detail/detail.wxss */
+
+.title{
+  font-size: 48rpx;
+  color: #1a1a1a;
+  line-height: 60rpx;
+  margin: 38rpx 3.5%;
+}
+.user-source{
+  display: flex;
+  flex-direction: row;
+  margin: 0 3.5%;
+}
+.source,.time{
+  font-size: 36rpx;
+  color: #999;
+}
+.source{
+  margin-right: 20rpx;
+}
+.content{
+  margin: 20rpx 3.5% 0;
+  line-height: 58rpx;
+  font-size: 32rpx;
+  color: #1a1a1a;
+  text-align: justify;
+}

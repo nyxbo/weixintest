@@ -2,13 +2,16 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "pages/test/test"
+    "pages/test/test",
+    "pages/news/news",
+    "pages/detail/detail"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#edf",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle":"white",
+    "enablePullDownRefresh":true
   },
   "tabBar": {
     "selectedColor": "#7B68EE",
@@ -23,6 +26,10 @@
       {
         "pagePath": "pages/test/test",
         "text": "测试page"
+      },
+      {
+        "pagePath": "pages/news/news",
+        "text": "新闻"
       }
     ]
   }

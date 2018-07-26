@@ -1,28 +1,64 @@
-<view>
+<!-- <view>
   这是测试page
   <button type="warn" open-type='share' id='shareTest'>clickme</button>
 </view>
-<!--数据绑定  -->
-<view>{{msg.a}}</view>
-<!--列表渲染  -->
-<view wx:for="{{msg.arr}}">{{index}} : {{"hello " + item}}</view>
-<!--条件渲染  -->
-<view wx:if="{{name == 'apple'}}">apple</view>
-<view wx:elif="{{name == 'banana'}}">banana</view>
-<view wx:else="{{name == 'orange'}}">orange</view>
-<!--模板  -->
+
+<view>数据绑定===>{{msg.a}}</view>
+
+<view wx:for="{{msg.arr}}">列表渲染===>{{index}} : {{"hello " + item}}</view>
+
+<view wx:if="{{name == 'apple'}}">条件渲染===>apple</view>
+<view wx:elif="{{name == 'banana'}}">条件渲染===>banana</view>
+<view wx:else="{{name == 'orange'}}">条件渲染===>orange</view>
 <template name="staffName">
   <view>
+  模板===>
     FirstName: {{firstName}}, LastName: {{lastName}}
   </view>
 </template>
 
 <template is="staffName" data="{{...staffA}}"></template>
 <template is="staffName" data="{{...staffB}}"></template>
-<template is="staffName" data="{{...staffC}}"></template><!-- "..."为扩展运算符-->
-<!--事件  -->
-<view bindtap="add">点击我加一{{count}}</view>
-<button bindtap='imgFn'>选择图片</button>
-<view>
-<image wx:if='{{imageArr}}' src='{{imageArr}}' style='width:300rpx;height:300rpx'></image>
-</view>
+<template is="staffName" data="{{...staffC}}"></template>"..."为扩展运算符 -->
+
+<!-- <block>事件===>
+  <view bindtap="add">点击我加一{{count}}</view>
+  <button bindtap='imgFn'>选择图片</button>
+  <view>
+    <image wx:if='{{imageArr}}' src='{{imageArr}}' style='width:300rpx;height:600rpx'></image>
+  </view>
+</block> -->
+
+<scroll-view scroll-y='true' style='height:1500rpx'>
+  <swiper indicator-dots='true' autoplay='true' interval='2000' class='my-swiper' circular='true' indicator-active-color='#F54343'>
+    <block wx:for="{{focusData}}">
+      <swiper-item>
+        <image src="{{item.thumbnail}}" class='focus-img'></image>
+      </swiper-item>
+    </block>
+  </swiper>
+  <block wx:for='{{listData}}'>
+  <navigator url='../detail/detail?aid={{item.documentId}}'>
+    <view class='news-list' wx:if='{{item.type === "doc"}}'> <!--&& item.style.view === "titleimg"-->
+        <view class='l-img'>
+          <image src='{{item.thumbnail}}'></image>
+        </view>
+        <view class='r-con'>
+          <view class='title'>{{item.title}}</view>
+          <view class='source'>
+            <view class='news-source'>{{item.source}}</view>
+            <view class='news-time'>{{item.updateTime}}</view>
+            <view class='news-num'>{{item.commentsall}}评</view>
+          </view>
+        </view>   
+    </view>
+    </navigator>
+    <!-- <view class='news-list' wx:if='{{item.type === "doc" && item.style.view ==="slideimg"}}'>
+      <view class='slideimgs'>
+        <block wx:for='{{item.style.images}}'>
+          <image src='{{item}}' class='slideimg'></image>
+        </block>
+      </view>
+    </view> -->
+  </block>
+</scroll-view>
