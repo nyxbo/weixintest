@@ -85,7 +85,23 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    wx.showNavigationBarLoading()
+    wx.startPullDownRefresh({
+      success:function(res){
+        // wx.showToast({
+        //   title: '刷新中',
+        //   icon:'loading'
+        // })
+        wx.showLoading({
+          title: '刷新中',
+          icon: 'loading'
+        })
+        console.log('刷新成功', res.errMsg)
+      },
+      fail:function(){
+        console.log('刷新失败')
+      }
+    })
   },
 
   /**
@@ -105,11 +121,6 @@ Page({
       path:'/pages/test',
       imageUrl:'http://p2.ifengimg.com/d27607d14a52d158/2018/27/content.png'
     }
-  },
-
-  // 用户下拉刷新事件
-  onPullDownRefresh: function(){
-
   },
 
   // 绑定事件
