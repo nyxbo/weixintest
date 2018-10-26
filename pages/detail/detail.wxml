@@ -1,5 +1,5 @@
 <!--pages/detail/detail.wxml-->
-<scroll-view style='height:1500rpx' scroll-y='true'>
+<!-- <scroll-view style='height:1500rpx' scroll-y='true'> -->
   <!-- <view class='container'> -->
     <view class='title'>{{detail.title}}</view>
     <view class='user-source'>
@@ -9,5 +9,52 @@
     <view class='content'>
       <rich-text nodes='{{text}}' class='richClass'></rich-text>
     </view>
+    <view class='bottomTip'>
+      <view bindtap='shareBtn' class='shareBtn'>
+         分享
+        <image src="/images/xwdq.png" class='share'></image>
+      </view>
+      <view class='section'>
+        <view class='pingA' bindtap='pingA'>评一下…</view>
+        <!-- <input placeholder='评一下' name="input" bindinput="bindKeyInput"></input> -->
+        <!-- <button form-type="submit" class='submit'> 提交 </button> -->
+        <!-- <view>提交</view> -->
+      </view>
+    </view>
+    <view class='shareBox' wx:if='{{isShow}}'>
+      分享至
+      <!-- <image src='{{userImg}}' class='tx'></image> -->
+      <button bindtap='friend' open-type='share'>好友</button>
+      <button bindtap='shareQuan'>朋友圈</button>
+      <button bindtap='cancle'>取消</button>
+    </view>
   <!-- </view> -->
-</scroll-view>
+<!-- </scroll-view> -->
+<view>
+  <!--生成海报  -->
+  <view class='imagePathBox' hidden="{{maskHidden == false}}">
+    <image src="{{imagePath}}" class='shengcheng'></image>
+    <button class='baocun' bindtap='baocun'>保存相册，分享到朋友圈</button>
+  </view>
+  <view hidden="{{maskHidden == false}}" class="mask"></view> 
+  <view class="canvas-box">
+      <canvas  style="width: 375px;height: 667px;position:fixed;top:9999px" canvas-id="mycanvas"/>
+  </view>  
+</view>
+
+
+<!-- 留言--------------------------------- -->  
+<view class='msg_box'>     
+  <view class='send_box'>        
+    <input value='{{inputVal}}' bindinput='changeinputVal' class='input' type='text' placeholder='请留言...' placeholder-class='pl_input' focus='true'></input>        
+    <button class='button' type='primary' bindtap='add'>留言</button>     
+  </view>     
+  <view class='tip' wx:if='{{msgData.length==0}}'>暂无留言...^_^...</view>     
+  <!-- 留言列表--------------------------- -->     
+  <view class='msgnav'>        
+    <view class='msglist' wx:for="{{msgData}}" wx:key="{{index}}">           
+      <text class='msg'>{{item.msg}}</text>           
+      <icon data-index='{{index}}' bindtap='del' class='icon' type='cancel'></icon>        
+    </view>
+  </view>
+</view>

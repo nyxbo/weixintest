@@ -85,21 +85,49 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+    var _self = this
     wx.showNavigationBarLoading()
     wx.startPullDownRefresh({
       success:function(res){
-        // wx.showToast({
+        // wx.showToast({  //显示消息提示框，duration持续时间
         //   title: '刷新中',
         //   icon:'loading'
         // })
-        wx.showLoading({
+        wx.showLoading({ //显示消息提示框，需要  wx.hideLoading  隐藏提示框
           title: '刷新中',
           icon: 'loading'
         })
         console.log('刷新成功', res.errMsg)
+        _self.refresh('down')
+        setTimeout(function(){
+          wx.hideLoading()
+          wx.hideNavigationBarLoading()
+          wx.stopPullDownRefresh()
+        },1000)
       },
       fail:function(){
         console.log('刷新失败')
+      }
+    })
+  },
+  refresh:function(type){
+    var length = 0
+    var listArray = []
+    var that = this
+    wx.request({
+      url: url + '&action=' + type,
+      success:function(res){
+        console.log('下拉',res)
+        res.data.forEach(function(item){
+          if(item.type === 'list'){
+            if(type === 'down'){
+              listArray = item.item.concat(that.data.listData)
+            }
+          }
+        })
+        that.setData({
+          listData: listArray
+        })
       }
     })
   },
@@ -108,7 +136,10 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    wx.showToast({  //显示消息提示框，duration持续时间
+      title: '没有更多了',
+      icon:'none'
+    })
   },
 
   /**

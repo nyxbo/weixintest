@@ -29,7 +29,7 @@
   </view>
 </block> -->
 
-<scroll-view scroll-y='true' style='height:1500rpx' bindscrolltoupper='onPullDownRefresh' upper-threshold='20'>
+<!-- <scroll-view scroll-y='true' style='height:1500rpx' bindscrolltoupper='onPullDownRefresh' upper-threshold='20'> -->
   <swiper indicator-dots='true' autoplay='true' interval='2000' class='my-swiper' circular='true' indicator-active-color='#F54343'>
     <block wx:for="{{focusData}}">
       <swiper-item>
@@ -61,4 +61,4 @@
       </view>
     </view> -->
   </block>
-</scroll-view>
+<!-- </scroll-view> -->
